@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Downloader</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner:wght@400;600;700&family=Space+Mono:wght@400;700&family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- normalize -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <!-- css file -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- fontawesome js -->
+    <script src="./js/all.min.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- main js -->
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <!-- landing -->
+    <div class="landing">
+      <!-- header -->
+      <header>
+        <!-- header container -->
+        <div class="container">
+          <i class="fa-brands fa-youtube"></i>
+          <h2 class="web-title">YouTube Downloader</h2>
+        </div>
+        <!-- end header container -->
+      </header>
+      <!-- end header -->
+
+      <!-- content -->
+      <div class="content">
+        <!-- content container -->
+        <div class="container">
+          <!-- url section -->
+          <section class="url-section">
+            <select class="download-type style-small">
+              <option value="video" class="video">Video</option>
+              <option value="playlist" class="playlist">Playlist</option>
+            </select>
+            <input
+              type="url"
+              class="search-input style-small"
+              placeholder="Video URL"
+            />
+            <button class="search-button style-small">Search</button>
+          </section>
+          <!-- video section -->
+          <section class="video-section">
+            <img class="cover" />
+            <div class="data">
+              <h3 class="title">The title of video</h3>
+              <p class="channel-name">The channel name</p>
+              <p class="playlist-items">25 Videos</p>
+              <select name="select-resolution" class="resolution style-small">
+                <option value="1080">1080P</option>
+                <option value="980">980P</option>
+                <option value="720">720P</option>
+                <option value="360">360P</option>
+              </select>
+              <button class="download style-small">Download</button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- download section -->
+      <section class="download">
+        <!-- container -->
+        <!-- end container-->
+      </section>
+      <!-- end download section-->
+
+      <!-- waiting alert -->
+      <div class="wait-alert">
+        <div class="container">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <!-- end waiting alert -->
+    </div>
+    <!-- end landing -->
+  </body>
+</html>

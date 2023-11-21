@@ -1,0 +1,308 @@
+body {
+  background-color: #eeeeee;
+  font-family: 'Edu TAS Beginner', cursive;
+  font-family: 'Space Mono', monospace;
+  font-family: 'Spline Sans Mono', monospace;
+  box-sizing: border-box;
+}
+/* global rules */
+.container {
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.style-small {
+  border: solid 2px black;
+  border-radius: 8px;
+  background-color: #eeeeee;
+  box-shadow: -2px 2px 0px 1px rgba(0, 0, 0, 1);
+}
+
+/* small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* end global rules */
+
+/* landing */
+
+.landing {
+  width: 100%;
+  height: 100vh;
+}
+
+.landing header {
+  padding: 15px 20px;
+}
+
+.landing header .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing header .container .fa-youtube {
+  color: red;
+  font-weight: bold;
+  font-size: 25px;
+  margin-right: 15px;
+}
+
+.landing .content .container {
+  margin: 15px auto;
+}
+
+.landing .content .url-section {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .landing .content .url-section {
+    flex-direction: column;
+  }
+}
+
+.landing .content .url-section .search-input {
+  font-size: 14px;
+  width: 80%;
+  max-width: 450px;
+  outline: none;
+  padding: 8px 25px;
+  transition: all ease 0.4s;
+}
+
+.landing .content .url-section .search-input:focus {
+  background-color: white;
+}
+
+.landing .content .url-section .search-input:focus::placeholder {
+  color: transparent;
+}
+
+.landing .content .url-section .search-button,
+.landing .url-section .download-type {
+  padding: 8px 25px;
+  transition: all ease 0.4s;
+}
+
+.landing .content .url-section .search-button:hover,
+.landing .url-section .download-type:hover {
+  background-color: #fff;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .landing .content .url-section .search-input {
+    width: 150px;
+  }
+
+  .landing .url-section .download-type,
+  .landing .content .url-section .search-button {
+    width: 200px;
+  }
+}
+
+.landing .video-section {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  gap: 50px;
+}
+
+.landing .video-section .cover {
+  background-image: url('../images/cover.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  width: 320px;
+  height: 180px;
+}
+
+.landing .video-section .data {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing .video-section .title {
+  margin-top: 0;
+  max-width: 200px;
+  line-break: auto;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.landing .video-section .date,
+.landing .video-section .channel-name,
+.landing .video-section .playlist-items {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 3px 0;
+}
+
+.landing .video-section .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.landing .video-section .row p {
+  margin: 5px 0 5px 20px;
+}
+
+.landing .video-section .download,
+.landing .video-section .resolution {
+  height: 40px;
+  padding: 0 15px;
+  margin-top: 15px;
+  transition: all ease 0.4s;
+}
+
+.landing .video-section .download:hover,
+.landing .video-section .resolution:hover {
+  background-color: #fff;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .landing .video-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .landing .video-section .cover {
+    width: 220px;
+    height: 145px;
+  }
+}
+
+/* start download section */
+
+.landing section.download {
+  margin-top: 50px;
+}
+
+.landing section.download .file-count {
+  text-align: center;
+}
+
+.landing section.download .progress-bar {
+  position: relative;
+  width: 80%;
+  height: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: black;
+  margin: 15px auto;
+}
+
+.landing section.download .progress-bar .progress {
+  display: block;
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.landing section.download .progress-bar .percentage {
+  margin: 10px 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* end download section */
+
+/* start waiting alert */
+
+.wait-alert {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(1, 1, 1, 80%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  display: none;
+}
+
+.wait-alert .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: -2px 2px 0px 1px rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  animation: loading 3s ease infinite;
+}
+
+.wait-alert .container div {
+  width: 16px;
+  background: #fff;
+  animation: load-animation 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.wait-alert .container div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+
+.wait-alert .container div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+
+.wait-alert .container div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+
+@keyframes load-animation {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+/* end waiting alert */
+
+/* end landing */
