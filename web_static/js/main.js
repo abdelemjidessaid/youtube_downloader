@@ -22,7 +22,9 @@ $(document).ready(function () {
         alert('This video URL is invalid!');
         return;
       }
-      fetchVideo(video_id);
+      fetchVideo(video_id).then(() => {
+        getResolutions(video_id);
+      });
     } else if (mode === 'playlist') {
       const playlist_id = getPlaylistId(url);
       if (!playlist_id) {
@@ -181,17 +183,76 @@ function getPlaylistId(url) {
   return null;
 }
 
-function displayVideoImage(url) {
+async function getResolutions(video_id) {
   /**
-   * function that displays the thumbnail of video or playlist in our page
-   * @url: the url of thumbnail
+   * function that fetch data that contains resolution from back-end
+   * @video_id: the id of video
    */
-  const videoSection = $('.landing .video-section');
-  $('.landing .video-section .cover').remove();
 
-  const image = $('<img>').attr('src', url);
-  image.addClass('cover');
-  videoSection.prepend(image);
+  const api = `http://100.26.171.172/video/${video_id}`;
+  await fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      const res = data.resolutions;
+      videos = res.filter((r) => r.type === 'video');
+      audios = res.filter((r) => r.type === 'audio');
+      downloadVideo(videos[0].url, 'video.mp4', 1, 1);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+}
+
+async function downloadVideo(url, fileName, index, count) {
+  /**
+   * function that downloads videos with specific names.
+   * @url: the download url
+   * @fileName: the name to save the file with
+   * @index: the index of video in a playlist
+   * @count: the number of videos in a playlist
+   */
+
+  const chunks = [];
+
+  fetch(url)
+    .then((response) => {
+      const reader = response.body.getReader();
+      const length = response.headers.get('content-length');
+      let downloaded = 0;
+
+      // add the attribute of disabled to the download button
+
+      function readData() {
+        return reader.read().then((result) => {
+          if (result.value) {
+            chunks.push(result.value);
+            downloaded += result.value.length;
+            const percent = Math.floor((downloaded / length) * 100);
+            progress(percent, index, count);
+          }
+
+          if (!result.done) return readData();
+        });
+      }
+
+      return readData();
+    })
+    .then(() => {
+      const anchor = document.createElement('a');
+      const blob = new Blob(chunks);
+      anchor.href = URL.createObjectURL(blob);
+      anchor.download = fileName;
+      document.body.append(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+    })
+    .catch((err) => {
+      console.log(err);
+      // remove the attribute of disabled
+    })
+    .finally(() => {
+      // remove the attribute of disabled
+    });
 }
 
 function displayVideoDetails(title, channelName) {
@@ -256,58 +317,6 @@ function displayPlaylistData(data) {
   $('.landing .content .container .video-section').remove();
   // add the new section
   $('.landing .content .container').append(element);
-}
-
-async function downloadVideo(url, fileName, index, count) {
-  /**
-   * function that downloads videos with specific names.
-   * @url: the download url
-   * @fileName: the name to save the file with
-   * @index: the index of video in a playlist
-   * @count: the number of videos in a playlist
-   */
-
-  const chunks = [];
-
-  fetch(url)
-    .then((response) => {
-      const reader = response.body.getReader();
-      const length = response.headers.get('content-length');
-      let downloaded = 0;
-
-      // add the attribute of disabled to the download button
-
-      function readData() {
-        return reader.read().then((result) => {
-          if (result.value) {
-            chunks.push(result.value);
-            downloaded += result.value.length;
-            const percent = Math.floor((downloaded / length) * 100);
-            progress(percent, index, count);
-          }
-
-          if (!result.done) return readData();
-        });
-      }
-
-      return readData();
-    })
-    .then(() => {
-      const anchor = document.createElement('a');
-      const blob = new Blob(chunks);
-      anchor.href = URL.createObjectURL(blob);
-      anchor.download = fileName;
-      document.body.append(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-    })
-    .catch((err) => {
-      console.log(err);
-      // remove the attribute of disabled
-    })
-    .finally(() => {
-      // remove the attribute of disabled
-    });
 }
 
 function progress(percent, index, total) {
