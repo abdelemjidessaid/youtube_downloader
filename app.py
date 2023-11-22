@@ -1,17 +1,20 @@
 from pytube import YouTube
 import json
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app=app)
 
 
-app.route('/video/<str:id>', methods=['GET'])
-def genereateDownloadLink(video_url):
+@app.route('/video/<video_id>', methods=['GET'])
+def genereateDownloadLink(video_id):
     """
         Function that generates download links with different qualities
         and returns the result as json.
     """
+    video_url = "https://www.youtube.com/watch?v=" + video_id
     try:
         result = YouTube(video_url)
         streams = result.streams
@@ -24,13 +27,15 @@ def genereateDownloadLink(video_url):
                 "url": stream.url
             }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
             links.append(stream_json)
-        return jsonify(links)
+        return jsonify({"resolutions": links})
     except Exception as e:
-        return jsonify({"error": str("")})
+        return jsonify({"error": str(e)})
 
 
 if __name__ == '__main__':
     """
         Starting point of website
     """
+    app.url_map.strict_slashes = False
     app.run(host='0.0.0.0', port=5000)
+
