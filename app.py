@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-CORS(app=app)
+CORS(app, origins=["http://localhost:5000", "http://http://100.26.171.172"])
 
 
 @app.route('/video/<video_id>', methods=['GET'])
@@ -29,7 +29,9 @@ def genereateDownloadLink(video_id):
                 "url": stream.url
             }
             links.append(stream_json)
-        return jsonify({"resolutions": links})
+        res = jsonify({"resolutions": links})
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
     except Exception as e:
         return jsonify({"error": str(e)})
 
