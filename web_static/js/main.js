@@ -213,58 +213,6 @@ function download(url) {
   document.body.removeChild(anchor);
 }
 
-async function downloadVideo(url, fileName, index, count) {
-  /**
-   * function that downloads videos with specific names.
-   * @url: the download url
-   * @fileName: the name to save the file with
-   * @index: the index of video in a playlist
-   * @count: the number of videos in a playlist
-   */
-
-  const chunks = [];
-
-  fetch(url)
-    .then((response) => {
-      const reader = response.body.getReader();
-      const length = response.headers.get('content-length');
-      let downloaded = 0;
-
-      // add the attribute of disabled to the download button
-
-      function readData() {
-        return reader.read().then((result) => {
-          if (result.value) {
-            chunks.push(result.value);
-            downloaded += result.value.length;
-            const percent = Math.floor((downloaded / length) * 100);
-            progress(percent, index, count);
-          }
-
-          if (!result.done) return readData();
-        });
-      }
-
-      return readData();
-    })
-    .then(() => {
-      const anchor = document.createElement('a');
-      const blob = new Blob(chunks);
-      anchor.href = URL.createObjectURL(blob);
-      anchor.download = fileName;
-      document.body.append(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-    })
-    .catch((err) => {
-      console.log(err);
-      // remove the attribute of disabled
-    })
-    .finally(() => {
-      // remove the attribute of disabled
-    });
-}
-
 function displayVideoDetails(title, channelName) {
   /**
    * function that displays details of video in our page
