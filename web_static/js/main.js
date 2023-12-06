@@ -196,8 +196,8 @@ async function getResolutions(video_id) {
       const res = data.resolutions;
       videos = res.filter((r) => r.type === 'video');
       audios = res.filter((r) => r.type === 'audio');
-      //downloadVideo(videos[0].url, 'video.mp4', 1, 1);
-      download(videos[0]).url;
+      downloadVideo(videos[0].url, 'video.mp4', 1, 1);
+      //download(videos[0].url);
     })
     .catch((err) => {
       alert(err);
@@ -205,12 +205,13 @@ async function getResolutions(video_id) {
 }
 
 function download(url) {
-  const anchor = document.createElement('a');
+  window.location.href = url;
+  /*const anchor = document.createElement('a');
   anchor.href = url;
   anchor.download = 'filename.mp4';
   document.body.appendChild(anchor);
   anchor.click();
-  document.body.removeChild(anchor);
+  document.body.removeChild(anchor); */
 }
 
 async function downloadVideo(url, fileName, index, count) {

@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5000", "http://http://100.26.171.172"])
+CORS(app, origins=["http://localhost:5000", "http://100.26.171.172"])
 
 
 @app.route('/video/<video_id>', methods=['GET'])
