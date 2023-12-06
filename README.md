@@ -19,13 +19,13 @@
 
 # Table of content
 
-- [<h3>About project</h3>](#section-0)
-- [<h3>How does it work</h3>](#section-1)
-- [<h3>Infrastructure</h3>](#section-2)
-- [<h3>technologies</h3>](#section-3)
-- [<h3>Screenshots</h3>](#section-4)
-- [<h3>Issues</h3>](#section-5)
-- [<h3>Authors</h3>](#section-6)
+- [About project](#section-0)
+- [How does it work](#section-1)
+- [Infrastructure](#section-2)
+- [Technologies](#section-3)
+- [Screenshots](#section-4)
+- [Issues](#section-5)
+- [Authors](#section-6)
 
 <br><br><br>
 
@@ -103,4 +103,4 @@
 
 # Authors <a id="section-6"></a>
 
-- [<h3>Abdelemjid Essaid</h3>](https://github.com/abdelemjidessaid) I have created this project alone.
+- [Abdelemjid Essaid](https://github.com/abdelemjidessaid) I have created this project alone.
